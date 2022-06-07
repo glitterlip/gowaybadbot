@@ -85,7 +85,16 @@
                 block_height: block_height,
             };
         }
-
+        const redirect = () => {
+            const params = new URLSearchParams(window.location.search)
+            let target = decodeURIComponent(params.get("redirect"))
+            const challenge = $('#challenge-id').val()
+            if (target.indexOf('?') !== -1) {
+                window.location.href = `${target}&challenge=${challenge}`
+            } else {
+                window.location.href = `${target}?challenge=${challenge}`
+            }
+        }
     </script>
 
 </head>

@@ -8,40 +8,38 @@
     <div class="verify-code-area mx-auto" style="width: 400px;">
         <div class="col-auto verify-input-area">
             <label for="verify-code-input" class="form-label" id="hint">请输入验证码</label>
-            <input type="text" class="form-control varify-input-code"  id="verify-code-input">
+            <input type="text" class="form-control varify-input-code" id="verify-code-input">
             <button type="button" id="check-btn" class="verify-btn btn btn-primary mb-3">Confirm</button>
         </div>
-<!--        <div class="verify-input-area mx-auto">-->
-<!--            <input type="text" class="varify-input-code">-->
-<!--            <button type="button" id="check-btn" class="verify-btn btn btn-primary">Confirm</button>-->
-<!--        </div>-->
+        <!--        <div class="verify-input-area mx-auto">-->
+        <!--            <input type="text" class="varify-input-code">-->
+        <!--            <button type="button" id="check-btn" class="verify-btn btn btn-primary">Confirm</button>-->
+        <!--        </div>-->
 
-<!--        <div class="verify-change-area">-->
-<!--            <a class="verify-change-code btn btn-primary">换一张</a>-->
-<!--        </div>-->
+        <!--        <div class="verify-change-area">-->
+        <!--            <a class="verify-change-code btn btn-primary">换一张</a>-->
+        <!--        </div>-->
     </div>
 </div>
 
 <script>
     $('#mpanel2').codeVerify({
-        defaultNum : 4,	//默认的文字数量
-        checkNum : 2,	//校对的文字数量
-        vSpace : 5,	//间隔
-        imgSize : {
+        defaultNum: 4,	//默认的文字数量
+        checkNum: 2,	//校对的文字数量
+        vSpace: 5,	//间隔
+        imgSize: {
             width: '200px',
             height: '100px',
         },
-        barSize : {
-            width : '600px',
-            height : '40px',
+        barSize: {
+            width: '600px',
+            height: '40px',
         },
-        ready : function() {
+        ready: function () {
         },
-        success : function() {
-            alert('验证成功，添加你自己的代码！');
-            //......后续操作
-        },
-        error : function() {
+        success: redirect,
+
+        error: function () {
 //		        	alert('验证失败！');
         }
 
