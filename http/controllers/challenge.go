@@ -90,7 +90,10 @@ func Verify(c echo.Context) error {
 	challenge := make(map[string]interface{})
 
 	json.Unmarshal(bytes, &challenge)
-	return respones.Success(c, 0, "ok", challenge)
+	if challenge["Code"].(float64) == float64(services.RulePassed) {
+		return respones.Success(c, 0, "ok", challenge)
+	}
+	return respones.Error(c, services.RuleFailed, "not passed yet")
 }
 
 func Refresh(c echo.Context) error {
