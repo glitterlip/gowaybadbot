@@ -1,0 +1,50 @@
+{{define "slide_rule"}}
+<div id="mpanel4" style="margin-top:50px;">
+    <div class="verify-img-out">
+        <div class="verify-img-panel">
+            <div class="verify-refresh" style="z-index:3">
+                <i class="iconfont icon-refresh"></i>
+            </div>
+            <img class="verify-img-canvas" width="320px" height="240ox" src="{{ .BackgroundImage| imageToBase64 |url}}"/>
+            <img class="verify-sub-block" width="50px" height="50px" style="left:0; position:absolute;"
+                 src="{{ .SealImage| imageToBase64 |url}}"/>
+            <div class="verify-bar-area">
+                <span class="verify-msg">${this.options.explain}</span>
+                <div class="verify-left-bar">
+                    <span class="verify-msg"></span>
+                    <div class="verify-move-block"><i class="verify-icon iconfont icon-right"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('#mpanel4').slideVerify({
+        type: 2,		//类型
+        vOffset: 5,	//误差量，根据需求自行调整
+        vSpace: 5,	//间隔
+        imgSize: {
+            width: '320px',
+            height: '240px',
+        },
+        blockSize: {
+            width: '50px',
+            height: '50px',
+        },
+        barSize: {
+            width: '320px',
+            height: '40px',
+        },
+        ready: function () {
+        },
+        success: function () {
+            alert('验证成功，添加你自己的代码！');
+        },
+        error: function () {
+        }
+
+    });
+
+</script>
+
+{{end}}

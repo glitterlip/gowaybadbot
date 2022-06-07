@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>安全验证</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/verify.css">
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/5.1.3/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        main > .container {
+            padding: 60px 15px 0;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.staticfile.org/twitter-bootstrap/5.1.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.min.js"></script>
+    {{if eq .challenge.Type 1 }}
+    <script type="text/javascript" src="/static/js/rules/input.js"></script>
+    {{else if eq .challenge.Type 2}}
+    <script type="text/javascript" src="/static/js/rules/slide.js"></script>
+    {{else if eq .challenge.Type 3}}
+    <script type="text/javascript" src="/static/js/rules/click.js"></script>
+    {{end}}
+    <script>
+        const MODE_POP = "POP";
+        const resetSize = (obj) => {
+            let img_width, img_height, bar_width, bar_height, block_width, block_height, circle_radius;	//图片的宽度、高度，移动条的宽度、高度
+            const parentWidth = obj.$element.parent().width() || $(window).width();
+            const parentHeight = obj.$element.parent().height() || $(window).height();
+            //eg: if container size is 100px, and image size is 50%,so the image real size is 50px
+            if (obj.options.imgSize.width.indexOf('%') !== -1) {
+                img_width = parseInt(obj.options.imgSize.width) / 100 * parentWidth + 'px';
+            } else {
+                img_width = obj.options.imgSize.width;
+            }
+            if (obj.options.imgSize.height.indexOf('%') !== -1) {
+                img_height = parseInt(obj.options.imgSize.height) / 100 * parentHeight + 'px';
+            } else {
+                img_height = obj.options.imgSize.height;
+            }
+            if (obj.options.barSize.width.indexOf('%') !== -1) {
+                bar_width = parseInt(obj.options.barSize.width) / 100 * parentWidth + 'px';
+            } else {
+                bar_width = obj.options.barSize.width;
+            }
+            if (obj.options.barSize.height.indexOf('%') !== -1) {
+                bar_height = parseInt(obj.options.barSize.height) / 100 * parentHeight + 'px';
+            } else {
+                bar_height = obj.options.barSize.height;
+            }
+            if (obj.options.blockSize) {
+                if (obj.options.blockSize.width.indexOf('%') !== -1) {
+                    block_width = parseInt(obj.options.blockSize.width) / 100 * parentWidth + 'px';
+                } else {
+                    block_width = obj.options.blockSize.width;
+                }
+                if (obj.options.blockSize.height.indexOf('%') !== -1) {
+                    block_height = parseInt(obj.options.blockSize.height) / 100 * parentHeight + 'px';
+                } else {
+                    block_height = obj.options.blockSize.height;
+                }
+            }
+            return {
+                img_width: img_width,
+                img_height: img_height,
+                bar_width: bar_width,
+                bar_height: bar_height,
+                block_width: block_width,
+                block_height: block_height,
+            };
+        }
+
+    </script>
+
+</head>
+<body class="d-flex flex-column h-100">
+
+<header>
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">安全验证</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                    <!--                    <li class="nav-item">-->
+                    <!--                        <a class="nav-link active" aria-current="page" href="#">Home</a>-->
+                    <!--                    </li>-->
+                    <!--                    <li class="nav-item">-->
+                    <!--                        <a class="nav-link" href="#">Link</a>-->
+                    <!--                    </li>-->
+                    <!--                    <li class="nav-item">-->
+                    <!--                        <a class="nav-link disabled">Disabled</a>-->
+                    <!--                    </li>-->
+                </ul>
+                <!--                <form class="d-flex">-->
+                <!--                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+                <!--                    <button class="btn btn-outline-success" type="submit">Search</button>-->
+                <!--                </form>-->
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main class="flex-shrink-0">
+    <div class="container">
+        <div class="row">
+            <p class="text-center fs-1 ">访问过于频繁，请验证后继续</p>
+
+        </div>
+        <div class="row d-flex align-items-center">
+            {{if eq .challenge.Type 1 }}
+            {{template "input_rule" .challenge.Rule}}
+            {{else if eq .challenge.Type 2}}
+            {{template "slide_rule" .challenge.Rule}}
+            {{else if eq .challenge.Type 3}}
+            {{template "click_rule" .challenge.Rule}}
+            {{end}}
+        </div>
+        <input type="hidden" value="{{.challenge.Id}}" id="challenge-id">
+    </div>
+</main>
+
+<footer class="footer mt-auto py-3 bg-light">
+    <div class="container">
+        <span class="text-muted"></span>
+    </div>
+</footer>
+
+</body>
+</html>
