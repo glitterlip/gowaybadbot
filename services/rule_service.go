@@ -75,9 +75,9 @@ func GetImageFileNameForRule(rule string) string {
 	var f []fs.DirEntry
 	switch rule {
 	case "slide":
-		f, _ = ImagesFs.ReadDir("templates/slide")
+		f, _ = ImagesFs.ReadDir("images/templates/slide")
 	case "click":
-		f, _ = ImagesFs.ReadDir("templates/click")
+		f, _ = ImagesFs.ReadDir("images/templates/click")
 	}
 
 	return fmt.Sprintf("%d.jpg", rand.New(rand.NewSource(time.Now().UnixNano())).Intn(len(f)))

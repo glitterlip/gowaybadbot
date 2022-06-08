@@ -46,12 +46,12 @@ func GetClickRuleAnswer() string {
 }
 
 func SetClickImage(rule *ClickRule, str string) {
-	imgFile, _ := services.ImagesFs.Open(fmt.Sprintf("templates/click/%s", rule.FielName))
+	imgFile, _ := services.ImagesFs.Open(fmt.Sprintf("images/templates/click/%s", rule.FielName))
 	img, _, _ := image.Decode(imgFile)
 	defer imgFile.Close()
 	ctx := gg.NewContextForImage(img)
 	fontSize := rule.Fontsize
-	ctx.LoadFontFace("resources/fonts/chinese.ttf", float64(fontSize))
+	ctx.SetFontFace(services.GetChineseFont())
 	for i := 0; i < WordCount; i++ {
 		x := float64(fontSize) * (float64(i)*1.5 + 1)
 		y := float64(ctx.Height() / 2)

@@ -53,16 +53,20 @@ func SetSlideImages(rule *SlideRule) {
 	backgroundPath := fmt.Sprintf("images/caches/slide/%s_background_%d.png", rule.FielName, rule.Answer)
 	sealPath := fmt.Sprintf("images/caches/slide/%s_seal_%d.png", rule.FielName, rule.Answer)
 	//check cache
-	backgroundImage, err := os.Open(backgroundPath)
-	defer backgroundImage.Close()
+	backgroundImage, err := services.ImagesFs.Open(backgroundPath)
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		defer backgroundImage.Close()
+	}
 	if err == nil {
 		rule.BackgroundImage, _, _ = image.Decode(backgroundImage)
-		sealImage, _ := os.Open(sealPath)
+		sealImage, _ := services.ImagesFs.Open(sealPath)
 		rule.SealImage, _, _ = image.Decode(sealImage)
 		defer sealImage.Close()
 		return
 	}
-	imgFile, err := os.Open(fmt.Sprintf("images/templates/slide/%s", rule.FielName))
+	imgFile, err := services.ImagesFs.Open(fmt.Sprintf("images/templates/slide/%s", rule.FielName))
 	img, _, _ := image.Decode(imgFile)
 	defer imgFile.Close()
 
