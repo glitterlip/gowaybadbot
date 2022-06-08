@@ -113,7 +113,7 @@ const CODE_TYPE_BASE = 1; //普通验证码
         fail: (_this) => {
             _this.options.error(_this);
             $('#hint').text('验证码错误，请输入新验证码')
-            _this.htmlDoms.code_input.val()
+            _this.htmlDoms.code_input.val('')
             _this.setCode();
         },
     };
