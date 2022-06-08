@@ -1,0 +1,3 @@
+https://fonts.google.com/noto/specimen/Noto+Serif+SC?subset=chinese-simplified
+https://github.com/lxgw/LxgwWenKai/blob/main/fonts/TTF/LXGWWenKaiMono-Regular.ttf
+https://github.com/source-foundry/Hack

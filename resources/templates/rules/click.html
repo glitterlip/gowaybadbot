@@ -1,0 +1,35 @@
+{{define "click_rule"}}
+<div id="mpanel5">
+    <div class="verify-img-out">
+        <div class="verify-img-panel">
+            <div class="verify-refresh" style="z-index:3">
+                <i class="iconfont icon-refresh"></i>
+            </div>
+            <img src="{{ .RuleImage| imageToBase64 |url}}" class="verify-img-canvas"/>
+        </div>
+    </div>
+    <div class="verify-bar-area mx-auto">
+        <span class="verify-msg">{{.Hint}}</span>
+    </div>
+</div>
+<script>
+    $('#mpanel5').pointsVerify({
+        checkNum: 2,	//校对的文字数量
+        vSpace: 5,	//间隔
+        imgSize: {
+            width: '320px',
+            height: '240px',
+        },
+        barSize: {
+            width: '320px',
+            height: '40px',
+        },
+        ready: function () {
+        },
+        success: redirect,
+        error: function () {
+        }
+
+    });
+</script>
+{{end}}
