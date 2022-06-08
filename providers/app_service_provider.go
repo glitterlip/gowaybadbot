@@ -12,10 +12,7 @@ import (
 func RegisterAppServiceProvider(e *echo.Echo) {
 	e.IPExtractor = echo.ExtractIPFromXFFHeader()
 	e.Use(middleware.LoggerWithConfig(middleware.LoggerConfig{
-		Format: `{"time":"${time_custom}","id":"${id}","remote_ip":"${remote_ip}",` +
-			`"method":"${method}","uri":"${uri}","user_agent":"${user_agent}",` +
-			`"status":${status},"error":"${error}","latency_human":"${latency_human}"` +
-			`,"bytes_in":${bytes_in},"bytes_out":${bytes_out}}` + "\n",
+		Format:           `[${time_custom}] ["${remote_ip}"] [${status}] [${method}] [${uri}] [${error}] [time:${latency_human}] [in:${bytes_in}] [out:${bytes_out}]` + "\n" + `[ua:${user_agent}]` + "\n",
 		CustomTimeFormat: "01-02 15:04:05",
 	}))
 	RegisterCacheService()
