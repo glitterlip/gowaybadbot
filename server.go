@@ -20,9 +20,7 @@ func main() {
 	providers.RegisterViewServiceProvider(e)
 	//static
 	e.StaticFS("/static", echo.MustSubFS(appFs, "resources/static"))
-	e.GET("/", func(c echo.Context) error {
-		return c.String(200, "^-^")
-	})
+	e.GET("/", controllers.Index)
 	e.GET("/challenge", controllers.Challenge).Name = "Challenge"
 	e.POST("/check", controllers.Check).Name = "check"
 	e.GET("/verify", controllers.Verify).Name = "verify"

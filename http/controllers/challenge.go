@@ -18,6 +18,7 @@ import jsoniter "github.com/json-iterator/go"
 var json = jsoniter.ConfigCompatibleWithStandardLibrary
 
 func Challenge(c echo.Context) error {
+	services.NewChallenge()
 	t := c.QueryParam("type")
 	challenge := &models.Challenge{
 		Id:         uuid.New().String(),
@@ -77,6 +78,7 @@ func Check(c echo.Context) error {
 	if err != nil {
 		return respones.Error(c, services.RuleFailed)
 	}
+	services.NewChallengePassed()
 	return respones.Success(c, "success")
 
 }
