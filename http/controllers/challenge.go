@@ -4,6 +4,7 @@ import (
 	"encoding/binary"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
+	"goawaybot/http/request"
 	"goawaybot/http/respones"
 	"goawaybot/models"
 	"goawaybot/rules"
@@ -46,6 +47,10 @@ func Challenge(c echo.Context) error {
 		challenge.Rule = rule
 	}
 	store.Put(challenge.Id, challenge, 600)
+	if request.IsJosn(&c) {
+		challenge.Rule = challenge.Rule.(models.ToMapable).ToMapRule()
+		return respones.Success(c, "ok", challenge)
+	}
 	return c.Render(http.StatusOK, "challenge.html", map[string]interface{}{
 		"challenge": challenge,
 	})
