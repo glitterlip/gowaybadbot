@@ -7,10 +7,8 @@ import (
 	"image"
 	"image/color"
 	_ "image/jpeg"
-	"image/png"
 	_ "image/png"
 	"math/rand"
-	"os"
 	"time"
 )
 
@@ -82,10 +80,8 @@ func SetSlideImages(rule *SlideRule) {
 	rule.BackgroundImage = ctx.Image()
 
 	//cache
-	sealReader, _ := os.Create(sealPath)
-	backgroundReader, _ := os.Create(backgroundPath)
-	png.Encode(sealReader, sealImg)
-	png.Encode(backgroundReader, rule.BackgroundImage)
+	services.SaveImage(sealPath, &sealImg)
+	services.SaveImage(backgroundPath, &rule.BackgroundImage)
 
 }
 func (rule *SlideRule) ToMapRule() map[string]interface{} {

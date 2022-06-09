@@ -43,3 +43,13 @@ func ImgToBase64(img image.Image) string {
 	res := "data:image/png;base64," + base64.StdEncoding.EncodeToString(r.Bytes())
 	return res
 }
+func SaveImage(path string, img *image.Image) {
+	reader, err := os.Create(path)
+	if err != nil {
+		fmt.Printf("cache image create file failed path:%s error:%s", path, err.Error())
+	}
+	err = png.Encode(reader, *img)
+	if err != nil {
+		fmt.Printf("cache image save file failed path:%s error:%s", path, err.Error())
+	}
+}
