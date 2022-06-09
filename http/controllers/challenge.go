@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"encoding/binary"
 	"github.com/google/uuid"
 	"github.com/labstack/echo/v4"
 	"goawaybot/http/request"
@@ -10,7 +9,6 @@ import (
 	"goawaybot/rules"
 	"goawaybot/services"
 	"goawaybot/store"
-	"net"
 	"net/http"
 	"time"
 )
@@ -24,7 +22,7 @@ func Challenge(c echo.Context) error {
 	challenge := &models.Challenge{
 		Id:         uuid.New().String(),
 		Code:       0,
-		UserIp:     binary.BigEndian.Uint32(net.ParseIP(c.RealIP()).To4()),
+		UserIp:     c.RealIP(),
 		CreateTime: time.Now(),
 		Secret:     "",
 	}
@@ -117,7 +115,7 @@ func Refresh(c echo.Context) error {
 	challenge := &models.Challenge{
 		Id:         uuid.New().String(),
 		Code:       0,
-		UserIp:     binary.BigEndian.Uint32(net.ParseIP(c.RealIP()).To4()),
+		UserIp:     c.RealIP(),
 		CreateTime: time.Now(),
 		Secret:     "",
 	}

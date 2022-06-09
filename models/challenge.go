@@ -15,7 +15,7 @@ type Challenge struct {
 	Id         string    //challenge id
 	Type       int       //verification type
 	Code       int       //verification result
-	UserIp     uint32    //challenger ip
+	UserIp     string    //challenger ip ipv6
 	CreateTime time.Time //challenge time
 	Secret     string    //encrypt key reserve
 	Rule       interface{}
