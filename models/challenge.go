@@ -12,13 +12,13 @@ type ToMapable interface {
 	ToMapRule() map[string]interface{}
 }
 type Challenge struct {
-	Id         string    //challenge id
-	Type       int       //verification type
-	Code       int       //verification result
-	UserIp     string    //challenger ip ipv6
-	CreateTime time.Time //challenge time
-	Secret     string    //encrypt key reserve
-	Rule       interface{}
-	Attempts   int8   //failed attempts
-	Ticket     string //verify ticket
+	Id         string      `json:"id"`          //challenge id
+	Type       int         `json:"type"`        //verification type
+	Code       int         `json:"code"`        //verification result
+	UserIp     string      `json:"user_ip"`     //challenger ip ipv6
+	CreateTime time.Time   `json:"create_time"` //challenge time
+	Secret     string      `json:"secret"`      //encrypt key reserve
+	Rule       interface{} `json:"rule"`
+	Attempts   int8        `json:"attempts"` //failed attempts
+	Ticket     string      `json:"ticket"`   //verify ticket
 }
