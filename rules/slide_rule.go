@@ -75,7 +75,7 @@ func SetSlideImages(rule *SlideRule) {
 	//create background
 	ctx := gg.NewContextForImage(img)
 	ctx.DrawRectangle(float64(rule.Answer), 50, 50, 50)
-	ctx.SetRGB(255, 255, 255)
+	ctx.SetRGBA(1, 1, 1, 0.2)
 	ctx.Fill()
 	rule.BackgroundImage = ctx.Image()
 
