@@ -18,10 +18,10 @@ var (
 
 type ClickRule struct {
 	RuleImage image.Image `json:"-"`
-	Answer    string
-	Hint      string
-	FielName  string
-	Fontsize  int
+	Answer    string      `json:"answer"`
+	Hint      string      `json:"hint"`
+	FielName  string      `json:"fiel_name"`
+	Fontsize  int         `json:"fontsize"`
 }
 
 func GetClickVerification() *ClickRule {
@@ -94,7 +94,7 @@ func SetClickAnswer(rule *ClickRule, str string) {
 }
 func (rule *ClickRule) ToMapRule() map[string]interface{} {
 	res := make(map[string]interface{})
-	res["Hint"] = rule.Hint
-	res["RuleImage"] = services.ImgToBase64(rule.RuleImage)
+	res["hint"] = rule.Hint
+	res["rule_image"] = services.ImgToBase64(rule.RuleImage)
 	return res
 }

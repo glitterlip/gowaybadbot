@@ -66,12 +66,12 @@ func Check(c echo.Context) error {
 	//check ip
 
 	//check if already successed
-	if challenge["Code"].(float64) == float64(services.RulePassed) {
+	if challenge["code"].(float64) == float64(services.RulePassed) {
 		return respones.Success(c, "success")
 	}
 
 	//check attempts
-	if challenge["Attempts"].(float64) > 1 {
+	if challenge["attempts"].(float64) > 1 {
 		return respones.Error(c, services.RuleExpired)
 	}
 
@@ -95,7 +95,7 @@ func Verify(c echo.Context) error {
 	challenge := make(map[string]interface{})
 
 	json.Unmarshal(bytes, &challenge)
-	if challenge["Code"].(float64) == float64(services.RulePassed) {
+	if challenge["code"].(float64) == float64(services.RulePassed) {
 		return respones.Success(c, 0, "ok", challenge)
 	}
 	return respones.Error(c, services.RuleFailed, "not passed yet")
@@ -120,7 +120,7 @@ func Refresh(c echo.Context) error {
 		Secret:     "",
 	}
 
-	switch oldChallenge["Type"].(float64) {
+	switch oldChallenge["type"].(float64) {
 	case float64(models.TypeInput):
 		rule := rules.GetInputVerification()
 		challenge.Type = models.TypeInput

@@ -32,9 +32,9 @@ type SubImager interface {
 type SlideRule struct {
 	BackgroundImage image.Image `json:"-"`
 	SealImage       image.Image `json:"-"`
-	Answer          int
-	Offset          int
-	FielName        string
+	Answer          int         `json:"answer"`
+	Offset          int         `json:"offset"`
+	FielName        string      `json:"fiel_name"`
 }
 
 func GetSlideVerification() *SlideRule {
@@ -75,7 +75,7 @@ func SetSlideImages(rule *SlideRule) {
 	//create background
 	ctx := gg.NewContextForImage(img)
 	ctx.DrawRectangle(float64(rule.Answer), 50, 50, 50)
-	ctx.SetRGBA(1, 1, 1, 0.2)
+	ctx.SetRGBA(1, 1, 1, 0.4)
 	ctx.Fill()
 	rule.BackgroundImage = ctx.Image()
 
@@ -86,10 +86,10 @@ func SetSlideImages(rule *SlideRule) {
 }
 func (rule *SlideRule) ToMapRule() map[string]interface{} {
 	res := make(map[string]interface{})
-	res["BackgroundImage"] = services.ImgToBase64(rule.BackgroundImage)
-	res["SealImage"] = services.ImgToBase64(rule.SealImage)
-	res["Offset"] = rule.Offset
-	res["FielName"] = rule.FielName
+	res["background_image"] = services.ImgToBase64(rule.BackgroundImage)
+	res["seal_image"] = services.ImgToBase64(rule.SealImage)
+	res["offset"] = rule.Offset
+	res["fiel_name"] = rule.FielName
 
 	return res
 }

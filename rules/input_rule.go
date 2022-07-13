@@ -25,8 +25,8 @@ var (
 
 type InputRule struct {
 	RuleImage image.Image `json:"-"`
-	Answer    string
-	Hint      string
+	Answer    string      `json:"answer"`
+	Hint      string      `json:"hint"`
 }
 
 func GetInputVerification() *InputRule {
@@ -102,7 +102,7 @@ func writeChar(ctx *gg.Context, text string, x, y float64) {
 }
 func (rule *InputRule) ToMapRule() map[string]interface{} {
 	res := make(map[string]interface{})
-	res["Hint"] = rule.Hint
-	res["RuleImage"] = services.ImgToBase64(rule.RuleImage)
+	res["hint"] = rule.Hint
+	res["rule_image"] = services.ImgToBase64(rule.RuleImage)
 	return res
 }

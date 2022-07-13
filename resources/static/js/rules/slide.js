@@ -342,9 +342,9 @@ const SLIDE_MODE_FIXED = "FIXED";
                     "method": "GET",
                     "data": {"old-challenge": $("#challenge-id").val()}
                 }).then((r) => {
-                    $('#challenge-id').val(r.meta.Id)
-                    $('.verify-img-canvas').attr("src", r.meta.Rule.BackgroundImage)
-                    $('.verify-sub-block').attr("src", r.meta.Rule.SealImage)
+                    $('#challenge-id').val(r.meta.id)
+                    $('.verify-img-canvas').attr("src", r.meta.rule.background_image)
+                    $('.verify-sub-block').attr("src", r.meta.rule.seal_image)
                 })
             }
         },

@@ -78,8 +78,8 @@ const CODE_TYPE_BASE = 1; //普通验证码
                     "method": "GET",
                     "data": {"old-challenge": $("#challenge-id").val()}
                 }).then((r) => {
-                    $('#challenge-id').val(r.meta.Id)
-                    $('#rule-image').attr("src", r.meta.Rule.RuleImage)
+                    $('#challenge-id').val(r.meta.id)
+                    $('#rule-image').attr("src", r.meta.rule.rule_image)
                 })
             }
         },

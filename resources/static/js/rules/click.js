@@ -150,10 +150,10 @@
                     "method": "GET",
                     "data": {"old-challenge": $("#challenge-id").val()}
                 }).then((r) => {
-                    $('#challenge-id').val(r.meta.Id)
-                    $('.verify-img-canvas').attr("src", r.meta.Rule.RuleImage)
-                    $('.verify-msg').text(r.meta.Rule.Hint)
-                    _this.initHint = r.meta.Rule.Hint
+                    $('#challenge-id').val(r.meta.id)
+                    $('.verify-img-canvas').attr("src", r.meta.rule.rule_image)
+                    $('.verify-msg').text(r.meta.rule.hint)
+                    _this.initHint = r.meta.rule.hint
                     _this.hints = this.htmlDoms.msg.text().match(/\[(.*)]/)[1].split(',')
                     _this.$element.find('.verify-msg').text(_this.initHint);
                 })
