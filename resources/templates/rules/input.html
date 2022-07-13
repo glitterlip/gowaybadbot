@@ -24,25 +24,24 @@
 
 <script>
     $('#mpanel2').codeVerify({
-        defaultNum: 4,	//默认的文字数量
-        checkNum: 2,	//校对的文字数量
-        vSpace: 5,	//间隔
         imgSize: {
             width: '200px',
             height: '100px',
         },
-        barSize: {
-            width: '600px',
-            height: '40px',
-        },
         ready: function () {
         },
         success: redirect,
-
         error: function () {
-//		        	alert('验证失败！');
         }
 
+    });
+    $(document).keypress(function (e) {
+        if (e.which === 13) {
+            let code = $('.varify-input-code').val()
+            if (code.length === 4) {
+                $('.verify-btn').click()
+            }
+        }
     });
 </script>
 {{end}}
